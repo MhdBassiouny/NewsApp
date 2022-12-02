@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
             switch response{
                 case .success(let articles):
                     self?.data.article = articles
+                    self?.data.setInitialNews()
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                         self?.navigationItem.title = self?.data.selectedCategory
@@ -34,9 +35,9 @@ class HomeVC: UIViewController {
                 case .failure(let error):
                     print(error)
             }
-            
         }
     }
+    
     
     @IBAction func filterButton(_ sender: UIBarButtonItem) {        
         let filterCV = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Filter") as! FilterVC
@@ -53,15 +54,15 @@ class HomeVC: UIViewController {
 
 
 //MARK: - TableView
-extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.article.count
+        return data.paginationNews.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let article = data.article[indexPath.row]
+        let article = data.paginationNews[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.news, for: indexPath) as! NewsCell
 
         cell.newsTitle.text = article.title
@@ -76,8 +77,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let article = data.article[indexPath.row]
-        
+        let article = data.paginationNews[indexPath.row]
         let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewsDetails") as! NewsDetailsVC
         
         detailsVC.selectedTitle = article.title
@@ -85,6 +85,19 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         detailsVC.selectURL = article.urlToImage
         
         self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard data.currentNewsCount < data.limit else { return }
+       
+        let position = scrollView.contentOffset.y + (scrollView.frame.size.height)
+        if position > (tableView.contentSize.height - 100) {
+            self.data.addPagination()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 

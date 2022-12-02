@@ -11,8 +11,8 @@ import Alamofire
 struct DataSource {
     static var shared = DataSource()
     private let apiKey = "cd4de2a6237c4a939f56e648a2e547fb"
-
-    func getArticles(country: String, category: String, completion: @escaping (Result<[Article], Error>) -> Void) {
+    
+    mutating func getArticles(pagination: Bool = false, country: String, category: String, completion: @escaping (Result<[Article], Error>) -> Void) {
         
         var pathCategory: String {
             if category == "All Categories" {
