@@ -15,6 +15,7 @@ struct ArticlesData {
     var currentNewsCount: Int { return paginationNews.count }
     var selectedCountry = ""
     var selectedCategory = "All Categories"
+
     
     mutating func setInitialNews() {
         paginationNews = []

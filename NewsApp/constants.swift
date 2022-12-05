@@ -8,9 +8,14 @@
 import Foundation
 
 struct K {
-    static let categoryList = ["All Categories", "business", "entertainment", "generalhealth", "science", "sports", "technology"]
+    static let filterData = [
+        ["Title": "Category", "Value": K.categouryList],
+        ["Title": "Country", "Value": K.countryList]
+    ]
     
-    static let countryList = [("eg", "Egypt"), ("ar", "Country2"), ("us", "United States"), ("be", "Country4")]
+    static let categouryList = ["All Categories", "business", "entertainment", "generalhealth", "science", "sports", "technology"]
+    static let countryList = ["Egypt", "United States", "Country4"]
+    
     
     static let nibName = "NewsCell"
     
@@ -18,4 +23,6 @@ struct K {
         static let news = "NewsCell"
         static let categoryFilter = "categoryCell"
     }
+    
+    
 }

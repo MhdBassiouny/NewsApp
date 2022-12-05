@@ -41,12 +41,23 @@ class HomeVC: UIViewController {
     
     @IBAction func filterButton(_ sender: UIBarButtonItem) {        
         let filterCV = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Filter") as! FilterVC
-        filterCV.completion = { [weak self] selectedCategory in
+        
+        if let categoryPath = K.categouryList.firstIndex(of: data.selectedCategory) {
+            filterCV.selectedCategoryIndexPath = categoryPath
+        }
+        if let countryPath = K.countryList.firstIndex(of: data.selectedCountry) {
+            filterCV.selectedCountryIndexPath = countryPath
+        }
+        
+        filterCV.completion = { [weak self] selectedCategory, selectedCountry in
             DispatchQueue.main.async {
                 self?.data.selectedCategory = selectedCategory
+                self?.data.selectedCountry = selectedCountry
+                
                 self?.updateArticles()
             }
         }
+        
         let vc = UINavigationController(rootViewController: filterCV)
         present(vc, animated: true)
     }
@@ -99,5 +110,8 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
             }
         }
     }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        indexPath.row = data.paginationNews.count - 2
+//    }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class NewsDetailsVC: UIViewController {
     @IBOutlet weak var newsImage: UIImageView!
-    @IBOutlet weak var newsDescription: UITextView!
+    @IBOutlet weak var newsDescription: UILabel!
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var newsTitle: UILabel!
     
