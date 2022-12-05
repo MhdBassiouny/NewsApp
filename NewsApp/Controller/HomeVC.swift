@@ -107,13 +107,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == tableView , tableView.contentOffset.y < 50 {
-            //self.updateArticles()
-        }
-    }
-    
+
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard data.page == 1 || data.limit >= data.page * data.countPerPage else { return }

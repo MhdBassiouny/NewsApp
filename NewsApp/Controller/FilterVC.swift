@@ -24,7 +24,7 @@ class FilterVC: UIViewController {
         
         DispatchQueue.main.async {
             if let categoryIndexPath = self.selectedCategoryIndexPath {
-                self.tableView.selectRow(at: IndexPath(row: categoryIndexPath, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: 0)!)
+                self.tableView.selectRow(at: IndexPath(row: categoryIndexPath, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: categoryIndexPath)!)
                 self.tableView.cellForRow(at: IndexPath(row: categoryIndexPath, section: 0))?.accessoryType = .checkmark
             }
 
