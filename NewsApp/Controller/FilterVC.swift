@@ -20,6 +20,8 @@ class FilterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         DispatchQueue.main.async {
             if let categoryIndexPath = self.selectedCategoryIndexPath {
                 self.tableView.selectRow(at: IndexPath(row: categoryIndexPath, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: 0)!)

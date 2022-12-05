@@ -25,7 +25,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="h5R-4U-bHK"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eya-ob-PjA">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eya-ob-PjA">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -196,8 +196,8 @@
                                     <constraint firstAttribute="trailing" secondItem="6O0-FP-1Oe" secondAttribute="trailing" id="xqv-lu-QrI"/>
                                 </constraints>
                             </stackView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-10-qIX">
-                                <rect key="frame" x="0.0" y="138" width="414" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-10-qIX">
+                                <rect key="frame" x="188.5" y="138" width="37" height="37"/>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gQx-vx-0hD">
                                 <rect key="frame" x="30" y="208" width="354" height="60"/>
@@ -223,6 +223,7 @@
                             <constraint firstItem="gQx-vx-0hD" firstAttribute="top" secondItem="Bbv-GM-d2F" secondAttribute="top" constant="120" id="GDa-8S-aqg"/>
                             <constraint firstItem="T2P-e5-fYe" firstAttribute="trailing" secondItem="Bbv-GM-d2F" secondAttribute="trailing" id="M51-MR-VS4"/>
                             <constraint firstItem="T2P-e5-fYe" firstAttribute="bottom" secondItem="Bbv-GM-d2F" secondAttribute="bottom" id="RsZ-OQ-80G"/>
+                            <constraint firstItem="2Qb-10-qIX" firstAttribute="centerX" secondItem="lHw-qu-8QP" secondAttribute="centerX" id="Wrq-fS-rA5"/>
                             <constraint firstItem="T2P-e5-fYe" firstAttribute="leading" secondItem="Bbv-GM-d2F" secondAttribute="leading" id="YX5-Ti-IXd"/>
                             <constraint firstItem="gQx-vx-0hD" firstAttribute="leading" secondItem="Bbv-GM-d2F" secondAttribute="leading" constant="30" id="bpl-4v-IMX"/>
                             <constraint firstItem="T2P-e5-fYe" firstAttribute="top" secondItem="Bbv-GM-d2F" secondAttribute="top" id="f0c-Ag-Z3q"/>

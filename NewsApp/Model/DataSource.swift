@@ -13,7 +13,7 @@ struct DataSource {
     private let apiKey = "cd4de2a6237c4a939f56e648a2e547fb"
     private let countryCodes = ["Egypt": "eg", "United States": "us", "Country4": "bh"]
     
-    mutating func getArticles(pagination: Bool = false, country: String, category: String, completion: @escaping (Result<[Article], Error>) -> Void) {
+    mutating func getArticles(country: String, category: String, page: Int, completion: @escaping (Result<News, Error>) -> Void) {
         
         var pathCategory: String {
             if category == "All Categories" {
@@ -23,7 +23,7 @@ struct DataSource {
             }
         }
         var pathCountry: String {
-            if pathCategory == "" {
+            if pathCategory == "" &&  country == "" {
                 return "us"
             } else {
                 return self.countryCodes[country, default: "us"]
@@ -31,7 +31,7 @@ struct DataSource {
         }
         
         let url = URL(string:
-            "https://newsapi.org/v2/top-headlines?country=\(pathCountry)&category=\(pathCategory)&apiKey=\(apiKey)")
+            "https://newsapi.org/v2/top-headlines?country=\(pathCountry)&category=\(pathCategory)&page=\(page)&apiKey=\(apiKey)")
         
         guard let validURL = url else {
             return
@@ -42,7 +42,7 @@ struct DataSource {
                 completion(.failure(response.error!))
                 return
             }
-            completion(.success(news.articles))
+            completion(.success(news))
         }
     }
 }

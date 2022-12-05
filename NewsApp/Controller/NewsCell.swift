@@ -20,7 +20,6 @@ class NewsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         newsCell.layer.cornerRadius = 10
-        spinner.hidesWhenStopped = true
         spinner.startAnimating()
     }
 

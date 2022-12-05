@@ -10,14 +10,12 @@ import UIKit
 class HomeVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-
+    
     var data = ArticlesData()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner.hidesWhenStopped = true
-        
         tableView.register(UINib(nibName: K.nibName, bundle: nil), forCellReuseIdentifier: K.CellIdentifier.news)
         
         updateArticles()
@@ -25,17 +23,23 @@ class HomeVC: UIViewController {
     
     
     func updateArticles(){
-        DataSource.shared.getArticles(country: self.data.selectedCountry, category: self.data.selectedCategory) { [weak self] response in
+        DataSource.shared.getArticles(
+            country:    self.data.selectedCountry,
+            category:   self.data.selectedCategory,
+            page:       self.data.page) { [weak self] response in
+            
             switch response{
-                case .success(let articles):
+                case .success(let news):
                     self?.spinner.startAnimating()
-                    self?.data.article = articles
-                    self?.data.setInitialNews()
+                    self?.data.article += news.articles
+                    self?.data.limit = news.totalResults
+                    
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                         self?.navigationItem.title = self?.data.selectedCategory
                         self?.spinner.stopAnimating()
                     }
+                
                 case .failure(let error):
                     print(error)
             }
@@ -43,21 +47,23 @@ class HomeVC: UIViewController {
     }
     
     
-    @IBAction func filterButton(_ sender: UIBarButtonItem) {        
+    @IBAction func filterButton(_ sender: UIBarButtonItem) {
         let filterCV = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Filter") as! FilterVC
         
         if let categoryPath = K.categouryList.firstIndex(of: data.selectedCategory) {
             filterCV.selectedCategoryIndexPath = categoryPath
         }
+        
         if let countryPath = K.countryList.firstIndex(of: data.selectedCountry) {
             filterCV.selectedCountryIndexPath = countryPath
         }
         
+        
         filterCV.completion = { [weak self] selectedCategory, selectedCountry in
             DispatchQueue.main.async {
+                self?.data.resetData()
                 self?.data.selectedCategory = selectedCategory
                 self?.data.selectedCountry = selectedCountry
-                
                 self?.updateArticles()
             }
         }
@@ -72,12 +78,12 @@ class HomeVC: UIViewController {
 extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.paginationNews.count
+        return data.article.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let article = data.paginationNews[indexPath.row]
+        let article = data.article[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.news, for: indexPath) as! NewsCell
 
         cell.newsTitle.text = article.title
@@ -87,12 +93,11 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
             cell.newsImage.load(url: validURL, spinner: cell.spinner)
         }
         return cell
-        
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let article = data.paginationNews[indexPath.row]
+        let article = data.article[indexPath.row]
         let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewsDetails") as! NewsDetailsVC
         
         detailsVC.selectedTitle = article.title
@@ -104,18 +109,19 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard data.currentNewsCount < data.limit else { return }
-       
-        let position = scrollView.contentOffset.y + (scrollView.frame.size.height)
-        if position > (tableView.contentSize.height - 100) {
-            self.data.addPagination()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        if scrollView == tableView , tableView.contentOffset.y < 50 {
+            //self.updateArticles()
         }
     }
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        indexPath.row = data.paginationNews.count - 2
-//    }
+    
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard data.page == 1 || data.limit >= data.page * data.countPerPage else { return }
+        
+        if indexPath.row == data.article.count - 2 {
+            self.data.page += 1
+            self.updateArticles()
+        }
+    }
 }
 

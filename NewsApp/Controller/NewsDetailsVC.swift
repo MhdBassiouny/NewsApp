@@ -22,10 +22,7 @@ class NewsDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleView.layer.cornerRadius = 10
-        spinner.hidesWhenStopped = true
         spinner.startAnimating()
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
 
         newsTitle.text = selectedTitle
         newsDescription.text = selectedConteny
