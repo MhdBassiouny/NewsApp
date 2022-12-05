@@ -25,9 +25,9 @@ class FilterVC: UIViewController {
                 self.tableView.selectRow(at: IndexPath(row: categoryIndexPath, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: 0)!)
                 self.tableView.cellForRow(at: IndexPath(row: categoryIndexPath, section: 0))?.accessoryType = .checkmark
             }
-            
-            if let countryIndexPath = self.selectedCategoryIndexPath {
-                self.tableView.selectRow(at: IndexPath(row: countryIndexPath, section: 1), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: 0)!)
+
+            if let countryIndexPath = self.selectedCountryIndexPath {
+                self.tableView.selectRow(at: IndexPath(row: countryIndexPath, section: 1), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: countryIndexPath)!)
                 self.tableView.cellForRow(at: IndexPath(row: countryIndexPath, section: 1))?.accessoryType = .checkmark
             }
         }

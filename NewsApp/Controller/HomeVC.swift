@@ -9,12 +9,14 @@ import UIKit
 
 class HomeVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-   
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+
     var data = ArticlesData()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner.hidesWhenStopped = true
         
         tableView.register(UINib(nibName: K.nibName, bundle: nil), forCellReuseIdentifier: K.CellIdentifier.news)
         
@@ -26,11 +28,13 @@ class HomeVC: UIViewController {
         DataSource.shared.getArticles(country: self.data.selectedCountry, category: self.data.selectedCategory) { [weak self] response in
             switch response{
                 case .success(let articles):
+                    self?.spinner.startAnimating()
                     self?.data.article = articles
                     self?.data.setInitialNews()
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                         self?.navigationItem.title = self?.data.selectedCategory
+                        self?.spinner.stopAnimating()
                     }
                 case .failure(let error):
                     print(error)
@@ -80,7 +84,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
         cell.newsDate.text = article.publishedAt
         cell.newsSource.text = article.source.name
         if let imageURL = article.urlToImage, let validURL = URL(string: imageURL) {
-            cell.newsImage.load(url: validURL)
+            cell.newsImage.load(url: validURL, spinner: cell.spinner)
         }
         return cell
         
@@ -94,7 +98,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
         detailsVC.selectedTitle = article.title
         detailsVC.selectedConteny = article.content
         detailsVC.selectURL = article.urlToImage
-        
+
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     

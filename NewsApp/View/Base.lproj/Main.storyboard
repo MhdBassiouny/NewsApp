@@ -25,6 +25,9 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="h5R-4U-bHK"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eya-ob-PjA">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -32,6 +35,8 @@
                             <constraint firstItem="Bzo-1w-NTl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="2qj-5Q-OEA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Bzo-1w-NTl" secondAttribute="trailing" id="Nko-kx-tNa"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Bzo-1w-NTl" secondAttribute="bottom" id="YFj-Nh-pKA"/>
+                            <constraint firstItem="eya-ob-PjA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZvT-PW-xuP"/>
+                            <constraint firstItem="eya-ob-PjA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d88-nG-ADm"/>
                             <constraint firstItem="Bzo-1w-NTl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ydk-do-6QK"/>
                         </constraints>
                     </view>
@@ -43,6 +48,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="spinner" destination="eya-ob-PjA" id="Akd-PP-iOT"/>
                         <outlet property="tableView" destination="Bzo-1w-NTl" id="8bi-vQ-4pG"/>
                         <segue destination="sNK-NO-5hj" kind="show" id="MIi-17-rcN"/>
                     </connections>
@@ -190,6 +196,9 @@
                                     <constraint firstAttribute="trailing" secondItem="6O0-FP-1Oe" secondAttribute="trailing" id="xqv-lu-QrI"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-10-qIX">
+                                <rect key="frame" x="0.0" y="138" width="414" height="37"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gQx-vx-0hD">
                                 <rect key="frame" x="30" y="208" width="354" height="60"/>
                                 <subviews>
@@ -217,6 +226,7 @@
                             <constraint firstItem="T2P-e5-fYe" firstAttribute="leading" secondItem="Bbv-GM-d2F" secondAttribute="leading" id="YX5-Ti-IXd"/>
                             <constraint firstItem="gQx-vx-0hD" firstAttribute="leading" secondItem="Bbv-GM-d2F" secondAttribute="leading" constant="30" id="bpl-4v-IMX"/>
                             <constraint firstItem="T2P-e5-fYe" firstAttribute="top" secondItem="Bbv-GM-d2F" secondAttribute="top" id="f0c-Ag-Z3q"/>
+                            <constraint firstItem="2Qb-10-qIX" firstAttribute="top" secondItem="Bbv-GM-d2F" secondAttribute="top" constant="50" id="g4r-L6-XJ6"/>
                             <constraint firstItem="Bbv-GM-d2F" firstAttribute="trailing" secondItem="gQx-vx-0hD" secondAttribute="trailing" constant="30" id="wjl-0d-FQe"/>
                         </constraints>
                     </view>
@@ -225,6 +235,7 @@
                         <outlet property="newsDescription" destination="mxU-ZF-Rzp" id="F0J-K1-4L5"/>
                         <outlet property="newsImage" destination="DIx-bP-HeK" id="lNy-TG-9lh"/>
                         <outlet property="newsTitle" destination="kpd-YM-2Op" id="8Fn-0r-moB"/>
+                        <outlet property="spinner" destination="2Qb-10-qIX" id="9eP-3P-t39"/>
                         <outlet property="titleView" destination="gQx-vx-0hD" id="9O9-Yt-TMZ"/>
                     </connections>
                 </viewController>
