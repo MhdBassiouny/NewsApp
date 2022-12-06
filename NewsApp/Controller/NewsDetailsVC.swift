@@ -21,13 +21,24 @@ class NewsDetailsVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleView.layer.cornerRadius = 10
         spinner.startAnimating()
-
+    
         newsTitle.text = selectedTitle
         newsDescription.text = selectedConteny
         if let urlString = selectURL, let imgURL = URL(string: urlString) {
             newsImage.load(url: imgURL, spinner: spinner)
+        }
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        titleView.layer.cornerRadius = 10
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if spinner.isAnimating {
+            spinner.stopAnimating()
         }
     }
 }

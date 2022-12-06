@@ -13,25 +13,21 @@ class FilterVC: UIViewController {
     var selectedCategoryIndexPath: Int?
     var selectedCountryIndexPath: Int?
     
-    
-    // completion closure for passing the data back to teh main view
     public var completion: ((_ category: String, _ country: String) -> Void)?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        DispatchQueue.main.async {
-            if let categoryIndexPath = self.selectedCategoryIndexPath {
-                self.tableView.selectRow(at: IndexPath(row: categoryIndexPath, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: categoryIndexPath)!)
-                self.tableView.cellForRow(at: IndexPath(row: categoryIndexPath, section: 0))?.accessoryType = .checkmark
-            }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if let categoryIndexPath = self.selectedCategoryIndexPath {
+            self.selectOldFilters(raw: categoryIndexPath, setion: 0)
+        }
 
-            if let countryIndexPath = self.selectedCountryIndexPath {
-                self.tableView.selectRow(at: IndexPath(row: countryIndexPath, section: 1), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: countryIndexPath)!)
-                self.tableView.cellForRow(at: IndexPath(row: countryIndexPath, section: 1))?.accessoryType = .checkmark
-            }
+        if let countryIndexPath = self.selectedCountryIndexPath {
+            self.selectOldFilters(raw: countryIndexPath, setion: 1)
         }
     }
     
@@ -50,6 +46,12 @@ class FilterVC: UIViewController {
         
         completion?(selectedCategory, selectedCountry)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func selectOldFilters(raw: Int, setion: Int) {
+        self.tableView.selectRow(at: IndexPath(row: raw, section: setion), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: raw)!)
+        self.tableView.cellForRow(at: IndexPath(row: raw, section: setion))?.accessoryType = .checkmark
     }
 }
 
