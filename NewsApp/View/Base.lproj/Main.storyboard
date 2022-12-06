@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aEX-Xo-9CI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -150,6 +150,37 @@
                                     <constraint firstAttribute="height" constant="150" id="sKj-bL-Lar"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-10-qIX">
+                                <rect key="frame" x="188.5" y="143" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-cT-25v">
+                                <rect key="frame" x="0.0" y="288" width="414" height="574"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iP-vL-XdA">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-Wa-W72">
+                                                <rect key="frame" x="10" y="-20.5" width="394" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="kNE-Wa-W72" secondAttribute="trailing" constant="10" id="Jux-cl-ZVg"/>
+                                            <constraint firstItem="kNE-Wa-W72" firstAttribute="leading" secondItem="8iP-vL-XdA" secondAttribute="leading" constant="10" id="Mru-eX-kSn"/>
+                                            <constraint firstAttribute="height" constant="1500" id="acs-DX-aAx"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8iP-vL-XdA" firstAttribute="leading" secondItem="yIj-cT-25v" secondAttribute="leading" id="8Bs-Ed-cQ5"/>
+                                    <constraint firstAttribute="bottom" secondItem="8iP-vL-XdA" secondAttribute="bottom" id="JuG-ty-uLB"/>
+                                    <constraint firstItem="8iP-vL-XdA" firstAttribute="top" secondItem="yIj-cT-25v" secondAttribute="top" id="lbD-6B-PFF"/>
+                                    <constraint firstAttribute="trailing" secondItem="8iP-vL-XdA" secondAttribute="trailing" id="uXP-qY-kCd"/>
+                                </constraints>
+                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQx-vx-0hD">
                                 <rect key="frame" x="30" y="218" width="354" height="29.5"/>
                                 <subviews>
@@ -168,38 +199,6 @@
                                     <constraint firstAttribute="bottom" secondItem="kpd-YM-2Op" secondAttribute="bottom" constant="5" id="tBF-p5-1zj"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-10-qIX">
-                                <rect key="frame" x="188.5" y="143" width="37" height="37"/>
-                            </activityIndicatorView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-cT-25v">
-                                <rect key="frame" x="0.0" y="288" width="414" height="574"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iP-vL-XdA">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-Wa-W72">
-                                                <rect key="frame" x="10" y="0.0" width="394" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="kNE-Wa-W72" secondAttribute="trailing" constant="10" id="Jux-cl-ZVg"/>
-                                            <constraint firstItem="kNE-Wa-W72" firstAttribute="leading" secondItem="8iP-vL-XdA" secondAttribute="leading" constant="10" id="Mru-eX-kSn"/>
-                                            <constraint firstAttribute="height" constant="1500" id="acs-DX-aAx"/>
-                                            <constraint firstItem="kNE-Wa-W72" firstAttribute="top" secondItem="8iP-vL-XdA" secondAttribute="top" id="g07-0S-JDM"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="8iP-vL-XdA" firstAttribute="leading" secondItem="yIj-cT-25v" secondAttribute="leading" id="8Bs-Ed-cQ5"/>
-                                    <constraint firstAttribute="bottom" secondItem="8iP-vL-XdA" secondAttribute="bottom" id="JuG-ty-uLB"/>
-                                    <constraint firstItem="8iP-vL-XdA" firstAttribute="top" secondItem="yIj-cT-25v" secondAttribute="top" id="lbD-6B-PFF"/>
-                                    <constraint firstAttribute="trailing" secondItem="8iP-vL-XdA" secondAttribute="trailing" id="uXP-qY-kCd"/>
-                                </constraints>
-                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bbv-GM-d2F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -207,6 +206,7 @@
                             <constraint firstItem="2Qb-10-qIX" firstAttribute="top" secondItem="Bbv-GM-d2F" secondAttribute="top" constant="55" id="2TV-21-O9m"/>
                             <constraint firstItem="2Qb-10-qIX" firstAttribute="centerX" secondItem="lHw-qu-8QP" secondAttribute="centerX" id="3R6-38-tBa"/>
                             <constraint firstItem="DIx-bP-HeK" firstAttribute="top" secondItem="Bbv-GM-d2F" secondAttribute="top" id="Bld-8K-Gwr"/>
+                            <constraint firstItem="kNE-Wa-W72" firstAttribute="top" secondItem="gQx-vx-0hD" secondAttribute="bottom" constant="20" id="Ds1-LA-I0Q"/>
                             <constraint firstItem="yIj-cT-25v" firstAttribute="bottom" secondItem="Bbv-GM-d2F" secondAttribute="bottom" id="Evd-bD-uHI"/>
                             <constraint firstItem="gQx-vx-0hD" firstAttribute="leading" secondItem="Bbv-GM-d2F" secondAttribute="leading" constant="30" id="Fft-0h-mBg"/>
                             <constraint firstItem="DIx-bP-HeK" firstAttribute="leading" secondItem="Bbv-GM-d2F" secondAttribute="leading" id="KLh-BN-byW"/>
@@ -235,7 +235,7 @@
         <!--Navigation Controller-->
         <scene sceneID="iEW-mz-A50">
             <objects>
-                <navigationController storyboardIdentifier="mainVC" automaticallyAdjustsScrollViewInsets="NO" id="aEX-Xo-9CI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainVC" automaticallyAdjustsScrollViewInsets="NO" id="aEX-Xo-9CI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="RxD-zn-zym"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="r4W-Iy-ymc">

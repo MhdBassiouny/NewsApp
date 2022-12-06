@@ -108,7 +108,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
     }
     
 
-
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard data.page == 1 || data.limit >= data.page * data.countPerPage else { return }
         
