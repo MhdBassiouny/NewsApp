@@ -18,9 +18,10 @@ class FilterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if let categoryIndexPath = self.selectedCategoryIndexPath {
             self.selectOldFilters(raw: categoryIndexPath, setion: 0)
