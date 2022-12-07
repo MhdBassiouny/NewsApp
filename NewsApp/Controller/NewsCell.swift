@@ -10,17 +10,18 @@ import UIKit
 class NewsCell: UITableViewCell {
     
     @IBOutlet weak var newsCell: UIView!
-    @IBOutlet weak var newsImage: UIImageView!
+    @IBOutlet weak var newsLeftImage: UIImageView!
     @IBOutlet weak var newsTitle: UILabel!
     @IBOutlet weak var newsSource: UILabel!
     @IBOutlet weak var newsDate: UILabel!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var leftSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var newsRightImage: UIImageView!
+    @IBOutlet weak var rightSpinner: UIActivityIndicatorView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         newsCell.layer.cornerRadius = 10
-        spinner.startAnimating()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

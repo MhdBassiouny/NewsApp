@@ -12,6 +12,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var data = ArticlesData()
+    let predictArabic = NSPredicate(format: "SELF MATCHES %@", "(?s).*\\p{Arabic}.*")
 
     
     override func viewDidLoad() {
@@ -84,14 +85,25 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let article = data.article[indexPath.row]
+        let isArabic = predictArabic.evaluate(with: article.title)
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.news, for: indexPath) as! NewsCell
 
         cell.newsTitle.text = article.title
         cell.newsDate.text = article.publishedAt
         cell.newsSource.text = article.source.name
-        if let imageURL = article.urlToImage, let validURL = URL(string: imageURL) {
-            cell.newsImage.load(url: validURL, spinner: cell.spinner)
+        
+        cell.newsTitle.textAlignment = isArabic ? NSTextAlignment.right : NSTextAlignment.left
+        cell.newsRightImage.isHidden = isArabic ? false : true
+        cell.rightSpinner.isHidden = isArabic ? false : true
+        cell.newsLeftImage.isHidden = isArabic ? true : false
+        cell.leftSpinner.isHidden = isArabic ? true : false
+        isArabic ? cell.rightSpinner.startAnimating() : cell.leftSpinner.startAnimating()
+        
+        let displayData = isArabic ? (image: cell.newsRightImage, spinner: cell.rightSpinner) : (image: cell.newsLeftImage, spinner: cell.leftSpinner)
+        if let imageURL = article.urlToImage, let validURL = URL(string: imageURL), let image = displayData.image, let spinner = displayData.spinner {
+            image.load(url: validURL, spinner: spinner)
         }
+
         return cell
     }
     
@@ -103,6 +115,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
         detailsVC.selectedTitle = article.title
         detailsVC.selectedConteny = article.content
         detailsVC.selectURL = article.urlToImage
+        detailsVC.isArabic = predictArabic.evaluate(with: article.title)
 
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }

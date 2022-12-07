@@ -18,6 +18,7 @@ class NewsDetailsVC: UIViewController {
     var selectedTitle: String?
     var selectedConteny: String?
     var selectURL: String?
+    var isArabic = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,8 @@ class NewsDetailsVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         titleView.layer.cornerRadius = 10
+        newsTitle.textAlignment = isArabic ? NSTextAlignment.right : NSTextAlignment.left
+        newsDescription.textAlignment = isArabic ? NSTextAlignment.right : NSTextAlignment.left
     }
     
     

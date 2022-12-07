@@ -11,7 +11,6 @@ import Alamofire
 struct DataSource {
     static var shared = DataSource()
     private let apiKey = "cd4de2a6237c4a939f56e648a2e547fb"
-    private let countryCodes = ["Egypt": "eg", "United States": "us", "Country4": "bh"]
     
     mutating func getArticles(country: String, category: String, page: Int, completion: @escaping (Result<News, Error>) -> Void) {
         
@@ -26,7 +25,7 @@ struct DataSource {
             if pathCategory == "" &&  country == "" {
                 return "us"
             } else {
-                return self.countryCodes[country, default: "us"]
+                return K.countryCodes[country, default: "us"]
             }
         }
         

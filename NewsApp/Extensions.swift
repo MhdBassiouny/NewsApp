@@ -17,6 +17,8 @@ extension UIImageView {
                         self?.image = image
                         spinner.stopAnimating()
                     }
+                } else {
+                    spinner.stopAnimating()
                 }
             }
         }
