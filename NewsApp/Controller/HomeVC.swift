@@ -38,6 +38,7 @@ class HomeVC: UIViewController {
                         self?.tableView.reloadData()
                         self?.navigationItem.title = self?.data.selectedCategory
                         self?.spinner.stopAnimating()
+                        self?.data.isRefreshing = false
                     }
                 
                 case .failure(let error):
@@ -57,7 +58,6 @@ class HomeVC: UIViewController {
         if let countryPath = K.countryList.firstIndex(of: data.selectedCountry) {
             filterCV.selectedCountryIndexPath = countryPath
         }
-        
         
         filterCV.completion = { [weak self] selectedCategory, selectedCountry in
             DispatchQueue.main.async {
@@ -114,6 +114,17 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelega
         if indexPath.row == data.article.count - 2 {
             self.data.page += 1
             self.updateArticles()
+        }
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if tableView == scrollView, position < -50, data.isRefreshing == false {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.data.isRefreshing = true
+            }
         }
     }
 }
