@@ -14,7 +14,6 @@ struct ArticlesData {
     var limit = 0
     var selectedCountry = "United States"
     var selectedCategory = "All Categories"
-    var isRefreshing = false
     
     
     mutating func resetData(){

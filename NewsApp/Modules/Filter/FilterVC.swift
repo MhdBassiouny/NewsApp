@@ -6,28 +6,31 @@
 //
 
 import UIKit
+import Combine
 
 class FilterVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedCategoryIndexPath: Int?
-    var selectedCountryIndexPath: Int?
-    
-    public var completion: ((_ category: String, _ country: String) -> Void)?
+    var viewModel =  FilterViewModel()
+    var selectedData: (categoryIndex: Int?, counteryIndex: Int?)
+    @Published var toBeSelected: (category: String, country: String) = ("", "")
+    var anyCancellable: Set<AnyCancellable> = []
+    //public var completion: ((_ category: String, _ country: String) -> Void)?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        if let categoryIndexPath = self.selectedCategoryIndexPath {
+        super.viewDidAppear(animated)
+        
+        if let categoryIndexPath = self.selectedData.categoryIndex {
             self.selectOldFilters(raw: categoryIndexPath, setion: 0)
         }
 
-        if let countryIndexPath = self.selectedCountryIndexPath {
+        if let countryIndexPath = self.selectedData.counteryIndex {
             self.selectOldFilters(raw: countryIndexPath, setion: 1)
         }
     }
@@ -45,7 +48,9 @@ class FilterVC: UIViewController {
             selectedCountry = countryList[selectedCountryIndexPath.row]
         }
         
-        completion?(selectedCategory, selectedCountry)
+        // completion?(selectedCategory, selectedCountry)
+        toBeSelected = (selectedCategory, selectedCountry)
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -53,6 +58,10 @@ class FilterVC: UIViewController {
     func selectOldFilters(raw: Int, setion: Int) {
         self.tableView.selectRow(at: IndexPath(row: raw, section: setion), animated: false, scrollPosition: UITableView.ScrollPosition(rawValue: raw)!)
         self.tableView.cellForRow(at: IndexPath(row: raw, section: setion))?.accessoryType = .checkmark
+    }
+    
+    func setupView() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
 

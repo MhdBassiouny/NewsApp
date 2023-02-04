@@ -15,12 +15,10 @@ extension UIImageView {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self?.image = image
-                        spinner.stopAnimating()
                     }
-                } else {
-                    spinner.stopAnimating()
                 }
             }
         }
+        spinner.stopAnimating()
     }
 }

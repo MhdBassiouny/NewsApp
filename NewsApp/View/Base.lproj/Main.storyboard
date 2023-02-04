@@ -32,11 +32,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="Bzo-1w-NTl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="2qj-5Q-OEA"/>
+                            <constraint firstItem="Bzo-1w-NTl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2qj-5Q-OEA"/>
                             <constraint firstItem="eya-ob-PjA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Pu-JT-VnV"/>
                             <constraint firstItem="eya-ob-PjA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7Gp-2p-euV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Bzo-1w-NTl" secondAttribute="trailing" id="Nko-kx-tNa"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Bzo-1w-NTl" secondAttribute="bottom" id="YFj-Nh-pKA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bzo-1w-NTl" secondAttribute="bottom" id="YFj-Nh-pKA"/>
                             <constraint firstItem="Bzo-1w-NTl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ydk-do-6QK"/>
                         </constraints>
                     </view>
